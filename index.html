@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compatibility Matrix</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        h1 {
+            color: #ecf0f1;
+            text-align: center;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: #34495e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .version-select {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        select {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2980b9;
+            color: #ecf0f1;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        select:hover {
+            background-color: #3498db;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #34495e;
+            text-align: left;
+        }
+        th {
+            background-color: #2980b9;
+            color: #ecf0f1;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        tr {
+            transition: background-color 0.3s ease;
+        }
+        tr:nth-child(even) {
+            background-color: #3b5998;
+        }
+        tr:hover {
+            background-color: #3b5998;
+        }
+        tr:nth-child(odd) {
+            background-color: #3b5998;
+        }
+        td {
+            background-color: #2c3e50;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #95a5a6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Compatibility Matrix</h1>
+    <div class="version-select">
+        <label for="platform-version">Select Platform Version: </label>
+        <select id="platform-version">
+            <!-- Options will be populated by JavaScript -->
+        </select>
+    </div>
+    <table id="matrixTable">
+        <thead>
+            <tr>
+                <th>Module</th>
+                <th>Version</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows will be populated by JavaScript -->
+        </tbody>
+    </table>
+    <div class="footer">
+        &copy; 2024 Your Company. All rights reserved.
+    </div>
+</div>
+
+<script>
+    // Sample compatibility matrix data
+    const compatibilityMatrix = {
+        global_versions: [
+            {
+                version: "1.0.0",
+                modules: {
+                    "Module A": "1.0.0",
+                    "Module B": "2.1.0",
+                    "Module C": "3.0.0"
+                }
+            },
+            {
+                version: "1.1.0",
+                modules: {
+                    "Module A": "1.1.0",
+                    "Module B": "2.2.0",
+                    "Module C": "3.1.0"
+                }
+            },
+            {
+                version: "2.0.0",
+                modules: {
+                    "Module A": "2.0.0",
+                    "Module B": "3.0.0",
+                    "Module C": "4.0.0"
+                }
+            }
+        ]
+    };
+
+    // Populate the platform version dropdown
+    const versionSelect = document.getElementById('platform-version');
+    compatibilityMatrix.global_versions.forEach(version => {
+        const option = document.createElement('option');
+        option.value = version.version;
+        option.textContent = version.version;
+        versionSelect.appendChild(option);
+    });
+
+    // Function to update the table based on selected platform version
+    function updateTable(version) {
+        const tbody = document.getElementById('matrixTable').querySelector('tbody');
+        tbody.innerHTML = ''; // Clear existing rows
+
+        const selectedVersion = compatibilityMatrix.global_versions.find(v => v.version === version);
+        for (const [module, moduleVersion] of Object.entries(selectedVersion.modules)) {
+            const row = document.createElement('tr');
+            const moduleCell = document.createElement('td');
+            moduleCell.textContent = module;
+            const versionCell = document.createElement('td');
+            versionCell.textContent = moduleVersion;
+            row.appendChild(moduleCell);
+            row.appendChild(versionCell);
+            tbody.appendChild(row);
+        }
+    }
+
+    // Initial table population with the first version
+    if (compatibilityMatrix.global_versions.length > 0) {
+        updateTable(compatibilityMatrix.global_versions[0].version);
+    }
+
+    // Add event listener to update the table when a new version is selected
+    versionSelect.addEventListener('change', (event) => {
+        updateTable(event.target.value);
+    });
+
+    // Trigger change event to populate table initially
+    versionSelect.dispatchEvent(new Event('change'));
+</script>
+
+</body>
+</html>
