@@ -9,15 +9,14 @@
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #2c3e50;
-            color: #ecf0f1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            background-color: #ecf0f1;
+            background-image: linear-gradient(45deg, #bdc3c7 25%, transparent 25%, transparent 75%, #bdc3c7 75%, #bdc3c7), 
+                              linear-gradient(45deg, #bdc3c7 25%, transparent 25%, transparent 75%, #bdc3c7 75%, #bdc3c7);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
         }
         h1 {
-            color: #ecf0f1;
+            color: #2c3e50;
             text-align: center;
             font-weight: 300;
             margin-bottom: 30px;
@@ -25,42 +24,47 @@
         .container {
             max-width: 800px;
             width: 100%;
-            background: #34495e;
+            background: #ffffff;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            animation: floatBackground 30s linear infinite alternate;
         }
         .version-select {
             margin-bottom: 20px;
             text-align: center;
         }
         select {
-            padding: 10px 20px;
+            padding: 12px;
             font-size: 16px;
-            border: none;
+            border: 1px solid #bdc3c7;
             border-radius: 5px;
-            background-color: #2980b9;
-            color: #ecf0f1;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
+            background-color: #ecf0f1;
+            color: #34495e;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s, background-color 0.3s;
+            width: 100%;
+            max-width: 300px;
         }
         select:hover {
-            background-color: #3498db;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+            background-color: #dfe6e9;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
-            border-radius: 5px;
+            border-radius: 10px;
             overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         th, td {
             padding: 12px 15px;
-            border: 1px solid #34495e;
+            border: 1px solid #dfe6e9;
             text-align: left;
         }
         th {
-            background-color: #2980b9;
+            background-color: #3498db;
             color: #ecf0f1;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -69,22 +73,31 @@
             transition: background-color 0.3s ease;
         }
         tr:nth-child(even) {
-            background-color: #3b5998;
+            background-color: #ecf0f1;
         }
         tr:hover {
-            background-color: #3b5998;
+            background-color: #dfe6e9;
         }
         tr:nth-child(odd) {
-            background-color: #3b5998;
+            background-color: #ecf0f1;
         }
         td {
-            background-color: #2c3e50;
+            background-color: #ffffff;
         }
         .footer {
             text-align: center;
             margin-top: 20px;
             font-size: 14px;
             color: #95a5a6;
+        }
+
+        @keyframes floatBackground {
+            0% {
+                background-position: 0 0, 30px 30px;
+            }
+            100% {
+                background-position: 60px 0, 90px 90px;
+            }
         }
     </style>
 </head>
